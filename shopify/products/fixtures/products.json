@@ -1,0 +1,11 @@
+[
+  {"model": "products.company", "pk": 1, "fields": {"name": "CompanyA"}},
+  {"model": "products.company", "pk": 2, "fields": {"name": "CompanyB"}},
+  {"model": "products.product", "pk": 1, "fields": {"title": "Watches", "price": 3000, "inventory": 5, "company": 1}},
+  {"model": "products.product", "pk": 2, "fields": {"title": "white shoes", "price": 5000, "inventory": 10, "company": 2}},
+  {"model": "products.product", "pk": 3, "fields": {"title": "brown shoes", "price": 5500, "inventory": 10, "company": 2}},
+  {"model": "products.product", "pk": 4, "fields": {"title": "running shoes", "price": 6000, "inventory": 30, "company": 2}},
+  {"model": "products.cartitem", "pk": 1, "fields": {"product": 1, "quantity": 3}},
+  {"model": "products.cartitem", "pk": 2, "fields": {"product": 3, "quantity": 1}},
+  {"model": "products.cart", "pk": 1, "fields": {"userId": "test", "items": [1, 2]}}
+]
