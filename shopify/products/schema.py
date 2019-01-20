@@ -46,7 +46,7 @@ class CartType(DjangoObjectType):
 
 class Query(object):
     all_companies = graphene.List(CompanyType)
-    all_products = graphene.List(ProductType)
+    all_products = graphene.List(ProductType, all=graphene.Boolean())
     product = graphene.Field(ProductType, id=graphene.Int(), title=graphene.String())
     company = graphene.Field(CompanyType, id=graphene.Int(), name=graphene.String())
     cart = graphene.Field(CartType, userId=graphene.String())
@@ -55,6 +55,10 @@ class Query(object):
         return Company.objects.all()
 
     def resolve_all_products(self, info, **kwargs):
+        get_all = kwargs.get('all')
+        if get_all is None or all is False:
+            return Product.objects.select_related('company').filter(inventory__gt=0)
+
         return Product.objects.select_related('company').all()
 
     def resolve_product(self, info, **kwargs):
