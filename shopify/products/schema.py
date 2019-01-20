@@ -24,12 +24,16 @@ class CompanyType(DjangoObjectType):
 class CartItemType(DjangoObjectType):
     price = graphene.Int()
     title = graphene.String()
+    product_id = graphene.Int()
 
     def resolve_title(self, info):
         return self.product.title
 
     def resolve_price(self, info):
         return self.product.price
+
+    def resolve_product_id(self, info):
+        return self.product.id
 
     class Meta:
         model = CartItem
@@ -124,6 +128,33 @@ class AddToCart(graphene.Mutation):
         success = True
         return AddToCart(success=success)
 
+class CheckoutCart(graphene.Mutation):
+    class Arguments:
+        userId = graphene.String()
+
+    success = graphene.Boolean()
+
+    def mutate(self, info, userId):
+        success=False
+        cart = Cart.objects.get(userId=userId)
+        if (cart.items.count() == 0):
+            return CheckoutCart(success=success)
+
+        for item in cart.items.all():
+            product = Product.objects.get(id=item.product_id)
+            if product.inventory < item.quantity:
+                return CheckoutCart(success=success)
+
+        for item in cart.items.all():
+            product = Product.objects.get(id=item.product_id)
+            product.inventory -= item.quantity
+            product.save()
+            item.delete()
+
+        success=True
+        return CheckoutCart(success=success)
+
 class Mutation(object):
     create_cart = CreateCart.Field()
     add_to_cart = AddToCart.Field()
+    checkout_cart = CheckoutCart.Field()
