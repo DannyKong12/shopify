@@ -1,6 +1,6 @@
 # Shopify Backend Challenge 2019
 
-This is my implementation of the Shopify challenge for 2019, visit [getting started](quickstart.md) to see the docs
+This is my implementation of the Shopify challenge for 2019, visit [getting started](quickstart.md) to see the docs. If youre looking at README.md, visit the full docs [here](https://dannykong12.github.io/shopify/#/)
 
 ## Backend and API
 My implementation of the challenge is a simple backend with a GraphQL endpoint. Actionable instructions and queries are handled through GraphQL queries. To test the backend, you can use the GraphIQL view to build queries.

@@ -22,4 +22,4 @@ Users cannot proceed to checkout with no items in the cart, or if the quantity a
 
 ## Exception Safety
 
-The `CheckoutCart` endpoint makes key database changes, so we need to ensure that the function works properly. `CheckoutCart` can only be run if there are `items` in the `cart`, and if the `items` have enough inventory. Otherwise, the function fails without exception, setting `success=False` and **does not make changes to the database**. The `success` field allows for failure transparency, and the frontend should reflect errors accordingly.
+The `CheckoutCart` endpoint makes key database changes, so we need to ensure that the function works properly. `CheckoutCart` can only be run if there are `items` in the `cart`, and if the `items` have enough inventory. Otherwise, the function fails without exception, setting `success=False` and **does not make changes to the database**. The `success` field allows for failure transparency, and the frontend should reflect errors accordingly. 
