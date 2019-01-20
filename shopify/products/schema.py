@@ -39,7 +39,7 @@ class CartType(DjangoObjectType):
     userId = graphene.String()
 
     def resolve_price(self, info):
-        return sum([x.product.price for x in self.items.all()])
+        return sum([x.product.price*x.quantity for x in self.items.all()])
 
     class Meta:
         model = Cart
